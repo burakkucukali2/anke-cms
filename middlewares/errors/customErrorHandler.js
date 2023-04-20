@@ -1,5 +1,6 @@
 const CustomError = require("../../helpers/error/CustomError");
-const customErrorHandler = (err, req, res, next) => {
+
+const customErrorHandler = (err, req, res) => {
     let customError = err;
     if (err.name === "CastError") {
         customError = new CustomError("Please provide a valid id", 400);
