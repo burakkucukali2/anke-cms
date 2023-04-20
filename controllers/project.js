@@ -50,6 +50,16 @@ const addNewProject = asyncErrorWrapper(async (req, res) => {
     });
 });
 
+const getProjectById = asyncErrorWrapper(async (req, res) => {
+    const {id} = req.params;
+    const project = await Project.findById(id).populate('categories');
+
+    res.status(200).json({
+        success: true,
+        data: project
+    });
+});
+
 const updateProjectById = asyncErrorWrapper(async (req, res) => {
     const {id, name, location, structureFeature, projectFeature, totalArea, moldArea, ironAmount, concreteAmount, imgSrc, startDate, endDate, categories} = req.body;
 
@@ -78,6 +88,7 @@ const updateProjectById = asyncErrorWrapper(async (req, res) => {
 
 module.exports = {
     getAllProjects,
+    getProjectById,
     addNewProject,
     updateProjectById
 }

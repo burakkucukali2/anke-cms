@@ -3,28 +3,30 @@ const Project = require('../models/Project');
 const asyncErrorWrapper = require('express-async-handler');
 
 const addCategory = asyncErrorWrapper(async (req, res) => {
-    const name = "urbanTransformation"
+   const {name} = req.body;
 
         const category = await Category.create({
             name
         });
+
         res.status(200).json({
             success: true,
             data: category
         });
 });
 
-
 const getAllCategories = asyncErrorWrapper(async (req, res) => {
         const categories = await Category.find();
+
         res.status(200).json({
             success: true,
             data: categories
         });
 });
 
-const getProjectsByCategory = asyncErrorWrapper(async (req, res, next) => {
-    const categoryId = '64406f1cafa1274d36e529cc';
+const getProjectsByCategoryId = asyncErrorWrapper(async (req, res) => {
+
+    const categoryId = req.params.categoryId
     const page = parseInt(req.query.page) || 1;
     const limit = parseInt(req.query.limit) || 10;
     const skip = (page - 1) * limit;
@@ -51,6 +53,6 @@ const getProjectsByCategory = asyncErrorWrapper(async (req, res, next) => {
 
 module.exports = {
     getAllCategories,
-    getProjectsByCategory,
+    getProjectsByCategoryId,
     addCategory
 }
