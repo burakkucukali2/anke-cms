@@ -1,6 +1,7 @@
 const express = require('express');
 const bodyParser = require('body-parser');
 const dotenv = require('dotenv');
+const cors = require('cors');
 const connectDatabase = require('./helpers/database/connectDatabase');
 const customErrorHandler = require('./middlewares/errors/customErrorHandler');
 const routers = require('./routers');
@@ -13,6 +14,9 @@ const PORT = process.env.PORT;
 
 //MongoDB Connection
 connectDatabase();
+
+//Cors
+app.use(cors());
 
 //Body Parser
 app.use(bodyParser.json());
