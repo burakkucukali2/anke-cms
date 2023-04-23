@@ -3,6 +3,7 @@ const mongoose = require('mongoose');
 const projectSchema = new mongoose.Schema({
     name: { type: String, required: true },
     location: { type: String, required: true },
+    projectOwner: { type: String },
     structureFeature: { type: String},
     projectFeature: { type: String},
     totalArea: { type: Number },

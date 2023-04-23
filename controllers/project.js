@@ -27,10 +27,11 @@ const getAllProjects = asyncErrorWrapper(async (req, res) => {
 });
 
 const addNewProject = asyncErrorWrapper(async (req, res) => {
-    const {name, location, structureFeature, projectFeature, totalArea, moldArea, ironAmount, concreteAmount, imgSrc, startDate, endDate, categories} = req.body;
+    const {name, projectOwner, location, structureFeature, projectFeature, totalArea, moldArea, ironAmount, concreteAmount, imgSrc, startDate, endDate, categories} = req.body;
 
     const project = await Project.create({
         name,
+        projectOwner,
         location,
         structureFeature,
         projectFeature,
@@ -61,10 +62,11 @@ const getProjectById = asyncErrorWrapper(async (req, res) => {
 });
 
 const updateProjectById = asyncErrorWrapper(async (req, res) => {
-    const {id, name, location, structureFeature, projectFeature, totalArea, moldArea, ironAmount, concreteAmount, imgSrc, startDate, endDate, categories} = req.body;
+    const {id, name, projectOwner, location, structureFeature, projectFeature, totalArea, moldArea, ironAmount, concreteAmount, imgSrc, startDate, endDate, categories} = req.body;
 
         const project = await Project.findByIdAndUpdate(id, {
             name,
+            projectOwner,
             location,
             structureFeature,
             projectFeature,
