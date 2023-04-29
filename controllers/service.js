@@ -1,16 +1,17 @@
 const Service = require('../models/Service');
-const asyncErrorWrapper = require('express-async-handler');
 
-const getAllServices = asyncErrorWrapper(async (req, res) => {
+const errorWrapper = require("../helpers/error/errorWrapper");
+
+const getAllServices = errorWrapper(async (req, res) => {
     const services = await Service.find();
 
-    res.status(200).json({
+    return res.status(200).json({
         success: true,
         data: services
     });
 });
 
-const addService = asyncErrorWrapper(async (req, res) => {
+const addService = errorWrapper(async (req, res) => {
     const {name, suffix, imgSrc} = req.body;
 
     const service = await Service.create({

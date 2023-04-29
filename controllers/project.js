@@ -1,7 +1,8 @@
 const Project = require('../models/Project');
-const asyncErrorWrapper = require('express-async-handler');
 
-const getAllProjects = asyncErrorWrapper(async (req, res) => {
+const errorWrapper = require("../helpers/error/errorWrapper");
+
+const getAllProjects = errorWrapper(async (req, res) => {
   const page = parseInt(req.query.page) || 1;
     const limit = parseInt(req.query.limit) || 10;
     const skip = (page - 1) * limit;
@@ -26,7 +27,7 @@ const getAllProjects = asyncErrorWrapper(async (req, res) => {
     });
 });
 
-const addNewProject = asyncErrorWrapper(async (req, res) => {
+const addNewProject = errorWrapper(async (req, res) => {
     const {name, projectOwner, location, structureFeature, projectFeature, totalArea, moldArea, ironAmount, concreteAmount, imgSrc, startDate, endDate, categories} = req.body;
 
     const project = await Project.create({
@@ -51,7 +52,7 @@ const addNewProject = asyncErrorWrapper(async (req, res) => {
     });
 });
 
-const getProjectById = asyncErrorWrapper(async (req, res) => {
+const getProjectById = errorWrapper(async (req, res) => {
     const {id} = req.params;
     const project = await Project.findById(id).populate('categories');
 
@@ -61,7 +62,7 @@ const getProjectById = asyncErrorWrapper(async (req, res) => {
     });
 });
 
-const updateProjectById = asyncErrorWrapper(async (req, res) => {
+const updateProjectById = errorWrapper(async (req, res) => {
     const {id, name, projectOwner, location, structureFeature, projectFeature, totalArea, moldArea, ironAmount, concreteAmount, imgSrc, startDate, endDate, categories} = req.body;
 
         const project = await Project.findByIdAndUpdate(id, {

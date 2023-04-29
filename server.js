@@ -3,7 +3,7 @@ const bodyParser = require('body-parser');
 const dotenv = require('dotenv');
 const cors = require('cors');
 const connectDatabase = require('./helpers/database/connectDatabase');
-const customErrorHandler = require('./middlewares/errors/customErrorHandler');
+const errorHandler = require('./middlewares/errors/errorHandler');
 const routers = require('./routers');
 
 //Environment variables
@@ -26,6 +26,6 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use('/api', routers);
 
 //Error Handling Middleware
-app.use(customErrorHandler)
+app.use(errorHandler)
 
 app.listen(PORT, () => console.log(`App listening on port ${PORT}!`));

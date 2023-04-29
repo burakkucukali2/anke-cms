@@ -1,8 +1,9 @@
 const Category = require('../models/Category');
 const Project = require('../models/Project');
-const asyncErrorWrapper = require('express-async-handler');
 
-const addCategory = asyncErrorWrapper(async (req, res) => {
+const errorWrapper = require("../helpers/error/errorWrapper");
+
+const addCategory = errorWrapper(async (req, res) => {
    const {name} = req.body;
 
         const category = await Category.create({
@@ -15,7 +16,7 @@ const addCategory = asyncErrorWrapper(async (req, res) => {
         });
 });
 
-const getAllCategories = asyncErrorWrapper(async (req, res) => {
+const getAllCategories = errorWrapper(async (req, res) => {
         const categories = await Category.find();
 
         res.status(200).json({
@@ -24,7 +25,7 @@ const getAllCategories = asyncErrorWrapper(async (req, res) => {
         });
 });
 
-const getProjectsByCategoryId = asyncErrorWrapper(async (req, res) => {
+const getProjectsByCategoryId = errorWrapper(async (req, res) => {
 
     const categoryId = req.params.categoryId
     const page = parseInt(req.query.page) || 1;
